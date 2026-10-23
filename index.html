@@ -1,169 +1,373 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SELAF | Quotation Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10233f">
+<title>SELAF | Corporate Quotation</title>
 <style>
 :root {
   --navy: #10233f;
-  --red: #d92735;
-  --blue: #2878bd;
-  --light: #f3f6fa;
-  --border: #dce3ec;
+  --navy2: #1c3555;
+  --red: #c92e3b;
+  --blue: #6cabc9;
+  --ink: #263548;
+  --muted: #718096;
+  --line: #dfe5ec;
+  --paper: #fff;
+  --bg: #eef2f6;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  background: var(--light);
-  color: #202c3c;
-  font: 14px Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font: 14px/1.5 Arial, Helvetica, sans-serif;
 }
-header {
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.topbar {
   background: var(--navy);
+  border-bottom: 4px solid var(--red);
   color: white;
-  padding: 22px 5%;
-  border-bottom: 5px solid var(--red);
+  padding: 20px max(20px, calc((100% - 1060px)/2));
 }
-.brand { font-size: 28px; font-weight: 900; letter-spacing: 2px; }
-.brand span { color: #e34a54; }
-header p { margin: 6px 0 0; color: #d4dfed; }
-main { max-width: 1100px; margin: 25px auto; padding: 0 16px; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.brand img {
+  width: 57px;
+  height: 57px;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
+.brand-name {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+.brand-sub {
+  color: #d6e1ee;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  margin-top: 2px;
+}
+.brand-tag {
+  color: #9ecde2;
+  font-size: 11px;
+  margin-top: 5px;
+}
+main {
+  max-width: 1060px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
 .panel {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 23px;
   margin-bottom: 18px;
-  box-shadow: 0 3px 12px #10233f0b;
 }
-h2 { color: var(--navy); font-size: 17px; margin: 0 0 18px; }
+.section-title {
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin: 0 0 17px;
+}
+.quote-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.quote-heading h1 {
+  color: var(--navy);
+  font-size: 29px;
+  letter-spacing: 2px;
+  margin: 0 0 4px;
+}
+.accent-line {
+  height: 3px;
+  width: 54px;
+  background: var(--red);
+  margin-top: 10px;
+}
+.quote-no {
+  min-width: 205px;
+  border-left: 3px solid var(--red);
+  padding: 3px 0 3px 14px;
+}
+.quote-no label, .field label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.quote-no input {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 15px;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 15px 20px;
 }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field label { font-weight: bold; font-size: 12px; color: #526176; }
-input, textarea, select {
+.field { min-width: 0; }
+.field input, .field textarea, .field select,
+.quote-no input, .bank-grid input {
   width: 100%;
-  padding: 11px;
-  border: 1px solid #ccd6e2;
-  border-radius: 6px;
-  background: white;
-  color: #202c3c;
-  font: inherit;
+  border: 1px solid #d9e1e9;
+  border-radius: 4px;
+  background: #fff;
+  padding: 10px;
+  color: var(--ink);
+  outline-color: var(--blue);
 }
-textarea { min-height: 75px; resize: vertical; }
-input:focus, textarea:focus, select:focus {
-  outline: 2px solid #9bc7ee;
-  border-color: var(--blue);
-}
+.field textarea { resize: vertical; min-height: 70px; }
 .wide { grid-column: 1 / -1; }
-.topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-button {
-  border: 0;
-  border-radius: 6px;
-  padding: 11px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 13px;
+.company-name-input {
+  font-weight: 700;
+  color: var(--navy) !important;
 }
-.primary { background: var(--red); color: white; }
-.secondary { background: var(--navy); color: white; }
-.light-btn { background: #e8eef5; color: var(--navy); }
-.danger { background: #ffeded; color: #a51e2a; }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 650px; }
-th {
-  background: var(--navy);
-  color: white;
-  text-align: left;
+.mini-label {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.company-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+.company-details .detail { overflow-wrap: anywhere; }
+.company-details strong {
+  display: block;
   font-size: 12px;
-  padding: 11px 8px;
+  color: var(--navy);
+  margin-bottom: 3px;
 }
-td { padding: 8px; border-bottom: 1px solid var(--border); }
-td input { min-width: 65px; padding: 9px 6px; }
-td:first-child input { min-width: 150px; }
-.amount { text-align: right; white-space: nowrap; }
+.company-details span {
+  color: #59697d;
+  font-size: 12px;
+}
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+thead { background: var(--navy); color: white; }
+th {
+  font-size: 10px;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 9px;
+}
+td { padding: 9px 7px; border-bottom: 1px solid var(--line); }
+td input {
+  width: 100%;
+  min-width: 60px;
+  padding: 9px 7px;
+  border: 1px solid #dfe5ec;
+  border-radius: 4px;
+}
+td:first-child input { min-width: 155px; }
+.right { text-align: right; white-space: nowrap; }
 .summary {
-  max-width: 390px;
-  margin: 18px 0 0 auto;
+  margin: 19px 0 0 auto;
+  max-width: 360px;
 }
 .total-row {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
 }
-.grand {
-  color: white;
+.total-row strong { color: var(--navy); }
+.grand-total {
   background: var(--navy);
-  padding: 16px;
-  font-size: 19px;
-  font-weight: bold;
-  border-bottom: 4px solid var(--red);
+  color: white;
+  padding: 15px;
+  margin-top: 7px;
+  border-bottom: 3px solid var(--red);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 17px;
+  font-weight: 800;
 }
-.actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.note { font-size: 12px; color: #64748b; line-height: 1.6; }
-.check { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
-.check input { width: auto; }
-footer { text-align: center; padding: 18px; color: #6b7788; font-size: 12px; }
+.bank-box {
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--navy);
+  padding: 17px;
+  background: #fafbfd;
+}
+.bank-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+.bank-grid label {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.bank-grid input {
+  font-size: 12px;
+  padding: 8px;
+}
+.terms-text {
+  color: #526176;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.terms-text textarea { width: 100%; }
+.signature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  margin-top: 25px;
+}
+.signature div {
+  border-top: 1px solid #aeb9c7;
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.btn {
+  padding: 11px 15px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.btn-red { background: var(--red); color: white; }
+.btn-navy { background: var(--navy); color: white; }
+.btn-light { background: #e1e8f0; color: var(--navy); }
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .6px;
+  padding: 20px;
+}
 @media(max-width:600px) {
-  .grid { grid-template-columns: 1fr; }
-  .wide { grid-column: auto; }
+  main { margin: 14px auto; padding: 0 9px; }
   .panel { padding: 15px; }
-  .topline { align-items: flex-start; flex-direction: column; }
+  .grid, .company-details, .bank-grid { grid-template-columns: 1fr; }
+  .wide { grid-column: auto; }
+  .brand img { width: 47px; height: 47px; }
+  .brand-name { font-size: 22px; }
+  .quote-heading h1 { font-size: 25px; }
 }
+@page { size: A4; margin: 12mm; }
 @media print {
-  body { background: white; font-size: 11px; }
-  header { padding: 14px 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: white; font-size: 10px; }
+  .topbar {
+    padding: 12px 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .brand img { width: 45px; height: 45px; }
+  .brand-name { font-size: 22px; }
   main { max-width: none; margin: 12px 0; padding: 0; }
-  .panel { box-shadow: none; border: 1px solid #ddd; padding: 12px; margin-bottom: 10px; break-inside: avoid; }
-  .no-print, button, .remove, .note.app-note { display: none !important; }
-  input, textarea, select { border: 0; padding: 2px; appearance: none; background: transparent; color: black; }
-  th, .grand { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  table { min-width: 0; }
-  td { padding: 5px 3px; }
+  .panel {
+    padding: 12px;
+    margin-bottom: 9px;
+    border: 1px solid #dfe5ec;
+    border-radius: 0;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+  .no-print { display: none !important; }
+  input, textarea, select {
+    border: none !important;
+    border-radius: 0;
+    padding: 2px 0 !important;
+    background: transparent !important;
+    color: #263548 !important;
+    resize: none;
+    appearance: none;
+  }
+  .quote-no { min-width: 160px; }
+  th, .grand-total, .topbar {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  th { padding: 8px 5px; }
+  td { padding: 5px 4px; }
   td:first-child input { min-width: 0; }
-  .summary { margin-top: 8px; }
-  footer { padding: 5px; }
+  table { min-width: 0; }
+  .bank-box { background: white; padding: 10px; }
+  .bank-grid input { padding: 2px 0 !important; }
+  .footer { padding: 8px 0 0; }
+  .section-title { margin-bottom: 10px; padding-bottom: 7px; }
+  .signature { margin-top: 18px; }
 }
 </style>
 </head>
 <body>
-<header>
-  <div class="brand">SELAF<span>.</span></div>
-  <p>SMART EXPRESS LOGISTICS &amp; FLEET MANAGEMENT</p>
-  <p>More Than Logistics — We Move Industries.</p>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="selaf-logo.png" alt="SELAF logo icon">
+    <div>
+      <div class="brand-name">SELAF</div>
+      <div class="brand-sub">SMART EXPRESS LOGISTICS &amp; FLEET MANAGEMENT</div>
+      <div class="brand-tag">More Than Logistics — We Move Industries.</div>
+    </div>
+  </div>
 </header>
 
 <main>
   <section class="panel">
-    <div class="topline">
+    <div class="quote-heading">
       <div>
-        <h2>QUOTATION</h2>
-        <div class="note">Complete the fields below, add your services and print your quotation.</div>
+        <h1>QUOTATION</h1>
+        <div class="mini-label">Commercial offer</div>
+        <div class="accent-line"></div>
       </div>
-      <button class="secondary no-print" onclick="newQuote()">New quotation</button>
-    </div>
-    <div class="grid">
-      <div class="field">
-        <label>Quotation number</label>
+      <div class="quote-no">
+        <label for="quoteNo">QUOTATION NUMBER</label>
         <input id="quoteNo">
       </div>
+    </div>
+    <div class="grid" style="margin-top:22px">
       <div class="field">
-        <label>Quotation date</label>
+        <label for="quoteDate">Quotation date</label>
         <input id="quoteDate" type="date">
       </div>
       <div class="field">
-        <label>Valid until</label>
+        <label for="validUntil">Valid until</label>
         <input id="validUntil" type="date">
       </div>
       <div class="field">
-        <label>Currency</label>
+        <label for="currency">Currency</label>
         <select id="currency" onchange="renderTotals()">
           <option value="ZAR">ZAR — South African Rand</option>
           <option value="USD">USD — US Dollar</option>
@@ -171,190 +375,249 @@ footer { text-align: center; padding: 18px; color: #6b7788; font-size: 12px; }
           <option value="CDF">CDF — Congolese Franc</option>
         </select>
       </div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2>FROM — SELAF</h2>
-    <div class="grid">
       <div class="field">
-        <label>Registered company name</label>
-        <input value="SELAF - Smart Express Logistics & Fleet Management">
-      </div>
-      <div class="field">
-        <label>Company registration number</label>
-        <input value="2021/723490/07">
-      </div>
-      <div class="field">
-        <label>Email</label>
-        <input type="email" value="selaf.operations@outlook.com">
-      </div>
-      <div class="field">
-        <label>Telephone</label>
-        <input value="065 759 1489 / 073 164 3987">
-      </div>
-      <div class="field wide">
-        <label>Business address (optional)</label>
-        <input id="businessAddress" placeholder="Enter registered or business address">
+        <label for="deliveryDate">Estimated service date</label>
+        <input id="deliveryDate" type="date">
       </div>
     </div>
   </section>
 
   <section class="panel">
-    <h2>BILL TO — CUSTOMER DETAILS</h2>
+    <h2 class="section-title">From · Service provider</h2>
+    <div class="field" style="margin-bottom:17px">
+      <label for="legalName">Registered company name</label>
+      <input class="company-name-input" id="legalName"
+        value="SELAF - Smart Express Logistics & Fleet Management (Pty) Ltd.">
+    </div>
+    <div class="company-details">
+      <div class="detail">
+        <strong>Registration number</strong>
+        <span>2021/723490/07</span>
+      </div>
+      <div class="detail">
+        <strong>Email</strong>
+        <span>selaf.operations@outlook.com</span>
+      </div>
+      <div class="detail">
+        <strong>Telephone</strong>
+        <span>065 759 1489 / 073 164 3987</span>
+      </div>
+      <div class="detail">
+        <strong>Business address</strong>
+        <span>
+          <input id="businessAddress"
+            value="Boundary Road — ADD SUBURB, CITY AND POSTAL CODE"
+            aria-label="Business address"
+            style="width:100%;border:1px solid #d9e1e9;padding:7px;border-radius:4px">
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">Customer · Bill to</h2>
     <div class="grid">
       <div class="field">
-        <label>Customer / company name</label>
-        <input id="customer" placeholder="Customer company name">
+        <label for="customer">Customer / company name</label>
+        <input id="customer" placeholder="Customer's registered name">
       </div>
       <div class="field">
-        <label>Contact person</label>
-        <input id="contact" placeholder="Customer contact person">
+        <label for="contact">Contact person</label>
+        <input id="contact" placeholder="Contact person">
       </div>
       <div class="field">
-        <label>Email address</label>
+        <label for="customerEmail">Email address</label>
         <input id="customerEmail" type="email" placeholder="Customer email">
       </div>
       <div class="field">
-        <label>Telephone</label>
+        <label for="customerPhone">Telephone</label>
         <input id="customerPhone" placeholder="Customer telephone">
       </div>
       <div class="field wide">
-        <label>Billing address / destination</label>
-        <textarea id="customerAddress" placeholder="Billing address, delivery point or route"></textarea>
+        <label for="customerAddress">Billing address / collection and delivery details</label>
+        <textarea id="customerAddress" placeholder="Customer address, collection point, destination or route"></textarea>
       </div>
     </div>
   </section>
 
   <section class="panel">
-    <div class="topline">
-      <h2>ITEMS &amp; SERVICES</h2>
-      <button class="primary no-print" onclick="addItem()">+ Add item</button>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px">
+      <h2 class="section-title" style="border:0;padding:0;margin:0">Services &amp; charges</h2>
+      <button class="btn btn-red no-print" onclick="addItem()">+ Add item</button>
     </div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:32%">Description</th>
+            <th>Description</th>
             <th>Qty</th>
             <th>Unit</th>
             <th>Rate</th>
-            <th class="amount">Line total</th>
-            <th class="no-print remove">Remove</th>
+            <th class="right">Amount</th>
+            <th class="no-print">Remove</th>
           </tr>
         </thead>
         <tbody id="items"></tbody>
       </table>
     </div>
-    <div class="grid" style="margin-top:18px">
+    <div class="grid no-print" style="margin-top:16px">
       <div class="field">
-        <label>Discount (%)</label>
+        <label for="discount">Discount (%)</label>
         <input id="discount" type="number" min="0" max="100" value="0" oninput="renderTotals()">
       </div>
       <div class="field">
-        <label>VAT rate (%) — only if applicable</label>
+        <label for="vatRate">VAT rate (%)</label>
         <input id="vatRate" type="number" min="0" max="100" value="0" oninput="renderTotals()">
-        <label class="check"><input id="vatEnabled" type="checkbox" onchange="renderTotals()"> Apply VAT to this quotation</label>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:9px;color:#526176;font-size:12px">
+          <input id="vatEnabled" type="checkbox" style="width:auto" onchange="renderTotals()">
+          Apply VAT where applicable
+        </label>
       </div>
     </div>
     <div class="summary">
       <div class="total-row"><span>Subtotal</span><strong id="subtotal">R 0.00</strong></div>
       <div class="total-row"><span>Discount</span><strong id="discountAmount">R 0.00</strong></div>
       <div class="total-row"><span>VAT</span><strong id="vatAmount">R 0.00</strong></div>
-      <div class="total-row grand"><span>TOTAL</span><span id="grandTotal">R 0.00</span></div>
+      <div class="grand-total"><span>TOTAL DUE</span><span id="grandTotal">R 0.00</span></div>
     </div>
-    <p class="note">VAT is disabled by default. Only apply VAT when appropriate for your business and tax status.</p>
   </section>
 
   <section class="panel">
-    <h2>TERMS &amp; CONDITIONS</h2>
-    <div class="grid">
-      <div class="field">
-        <label>Payment terms</label>
-        <input id="paymentTerms" value="As agreed in writing">
+    <h2 class="section-title">Banking details · Payment information</h2>
+    <div class="bank-box">
+      <div class="bank-grid">
+        <div>
+          <label for="bankName">Bank name</label>
+          <input id="bankName" value="ADD BANK NAME">
+        </div>
+        <div>
+          <label for="accountName">Account holder</label>
+          <input id="accountName" value="SELAF - Smart Express Logistics & Fleet Management (Pty) Ltd.">
+        </div>
+        <div>
+          <label for="accountType">Account type</label>
+          <input id="accountType" value="ADD ACCOUNT TYPE">
+        </div>
+        <div>
+          <label for="accountNumber">Account number</label>
+          <input id="accountNumber" value="ADD ACCOUNT NUMBER">
+        </div>
+        <div>
+          <label for="branchCode">Branch code</label>
+          <input id="branchCode" value="ADD BRANCH CODE">
+        </div>
+        <div>
+          <label for="paymentReference">Payment reference</label>
+          <input id="paymentReference" value="Use quotation number">
+        </div>
       </div>
-      <div class="field">
-        <label>Estimated delivery / service date</label>
-        <input id="deliveryDate" type="date">
-      </div>
-      <div class="field wide">
-        <label>Additional terms, exclusions or notes</label>
-        <textarea id="terms" placeholder="Include route details, cargo specifications, insurance arrangements, waiting time, exclusions and other applicable terms.">This quotation is subject to final confirmation of service availability, cargo details and agreed terms.</textarea>
-      </div>
+    </div>
+    <p class="terms-text">Please use the quotation number as your payment reference. Verify all banking information before issuing quotations to customers.</p>
+  </section>
+
+  <section class="panel">
+    <h2 class="section-title">Terms &amp; conditions</h2>
+    <div class="field">
+      <label for="paymentTerms">Payment terms</label>
+      <input id="paymentTerms" value="As agreed in writing">
+    </div>
+    <div class="field" style="margin-top:14px">
+      <label for="terms">Additional conditions, exclusions and service notes</label>
+      <textarea id="terms">This quotation is subject to confirmation of cargo details, service availability, route, loading and offloading requirements, and agreed payment terms. Transport is arranged through approved third-party service providers where applicable. Any additional charges must be agreed with the customer.</textarea>
+    </div>
+    <div class="signature">
+      <div>For SELAF · Authorised representative</div>
+      <div>Customer acceptance · Name and signature</div>
     </div>
   </section>
 
-  <section class="panel no-print">
-    <h2>FINISH YOUR QUOTATION</h2>
+  <section class="no-print">
     <div class="actions">
-      <button class="primary" onclick="printQuote()">Print / Save as PDF</button>
-      <button class="secondary" onclick="downloadQuote()">Download quotation data</button>
-      <button class="light-btn" onclick="saveDraft()">Save draft in this browser</button>
-      <button class="light-btn" onclick="loadDraft()">Load saved draft</button>
+      <button class="btn btn-red" onclick="printQuote()">Print / Save as PDF</button>
+      <button class="btn btn-navy" onclick="downloadData()">Download quotation data</button>
+      <button class="btn btn-light" onclick="saveDraft()">Save draft</button>
+      <button class="btn btn-light" onclick="loadDraft()">Load draft</button>
+      <button class="btn btn-light" onclick="newQuote()">New quotation</button>
     </div>
-    <p class="note app-note">Drafts are saved only in this browser on this device. Download the data as a backup. The PDF is generated by your browser's print function.</p>
   </section>
 </main>
 
-<footer>SELAF | Smart Express Logistics &amp; Fleet Management</footer>
+<footer class="footer">
+  SELAF · SMART EXPRESS LOGISTICS &amp; FLEET MANAGEMENT (PTY) LTD.<br>
+  More Than Logistics — We Move Industries.
+</footer>
 
 <script>
 const $ = id => document.getElementById(id);
 
-function makeQuoteNo() {
-  const d = new Date();
-  const date = d.getFullYear().toString() +
-    String(d.getMonth()+1).padStart(2,'0') +
-    String(d.getDate()).padStart(2,'0');
-  return 'SELAF-' + date + '-' +
-    Math.random().toString(36).slice(2,6).toUpperCase();
-}
-
-function setDefaultDates() {
-  const today = new Date();
-  const future = new Date(today);
-  future.setDate(today.getDate()+7);
-  $('quoteDate').value = localDate(today);
-  $('validUntil').value = localDate(future);
-}
 function localDate(d) {
   return d.getFullYear() + '-' +
     String(d.getMonth()+1).padStart(2,'0') + '-' +
     String(d.getDate()).padStart(2,'0');
 }
 
+function makeQuoteNo() {
+  const d = new Date();
+  const day = d.getFullYear() +
+    String(d.getMonth()+1).padStart(2,'0') +
+    String(d.getDate()).padStart(2,'0');
+  return 'SELAF-' + day + '-' +
+    Math.random().toString(36).slice(2,6).toUpperCase();
+}
+
+function setDates() {
+  const today = new Date();
+  const valid = new Date(today);
+  valid.setDate(today.getDate()+7);
+  $('quoteDate').value = localDate(today);
+  $('validUntil').value = localDate(valid);
+}
+
 function addItem(description='', qty=1, unit='Trip', rate=0) {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
-    <td><input aria-label="Description" placeholder="Transport / logistics service"></td>
-    <td><input aria-label="Quantity" type="number" min="0" step="any" value="1"></td>
-    <td><input aria-label="Unit" placeholder="Trip"></td>
-    <td><input aria-label="Rate" type="number" min="0" step="0.01" value="0"></td>
-    <td class="amount line-total">R 0.00</td>
-    <td class="no-print remove"><button type="button" class="danger" aria-label="Remove item">×</button></td>`;
-  const inputs = tr.querySelectorAll('input');
-  inputs[0].value = description;
-  inputs[1].value = qty;
-  inputs[2].value = unit;
-  inputs[3].value = rate;
-  inputs.forEach(el => el.addEventListener('input', renderTotals));
-  tr.querySelector('button').addEventListener('click', () => {
-    tr.remove();
-    renderTotals();
+  const row = document.createElement('tr');
+  const values = [description, qty, unit, rate];
+  const labels = ['Description', 'Quantity', 'Unit', 'Rate'];
+  values.forEach((value, index) => {
+    const td = document.createElement('td');
+    const input = document.createElement('input');
+    input.setAttribute('aria-label', labels[index]);
+    if (index === 1 || index === 3) {
+      input.type = 'number';
+      input.min = '0';
+      input.step = 'any';
+    }
+    if (index === 0) input.placeholder = 'Service description';
+    if (index === 2) input.placeholder = 'Trip';
+    input.value = value;
+    input.addEventListener('input', renderTotals);
+    td.appendChild(input);
+    row.appendChild(td);
   });
-  $('items').appendChild(tr);
+  const amount = document.createElement('td');
+  amount.className = 'right line-total';
+  amount.textContent = money(0);
+  row.appendChild(amount);
+
+  const removeCell = document.createElement('td');
+  removeCell.className = 'no-print';
+  const removeButton = document.createElement('button');
+  removeButton.className = 'btn btn-light';
+  removeButton.type = 'button';
+  removeButton.textContent = 'Remove';
+  removeButton.onclick = () => { row.remove(); renderTotals(); };
+  removeCell.appendChild(removeButton);
+  row.appendChild(removeCell);
+
+  $('items').appendChild(row);
   renderTotals();
 }
 
 function money(value) {
-  const currency = $('currency').value;
-  try {
-    return new Intl.NumberFormat('en-ZA', {
-      style: 'currency', currency, minimumFractionDigits: 2
-    }).format(value);
-  } catch {
-    return currency + ' ' + Number(value).toFixed(2);
-  }
+  return new Intl.NumberFormat('en-ZA', {
+    style: 'currency',
+    currency: $('currency').value,
+    minimumFractionDigits: 2
+  }).format(value);
 }
 
 function calculate() {
@@ -363,10 +626,11 @@ function calculate() {
     const inputs = row.querySelectorAll('input');
     const qty = Math.max(0, Number(inputs[1].value) || 0);
     const rate = Math.max(0, Number(inputs[3].value) || 0);
-    const line = qty * rate;
-    subtotal += line;
-    row.querySelector('.line-total').textContent = money(line);
+    const amount = qty * rate;
+    subtotal += amount;
+    row.querySelector('.line-total').textContent = money(amount);
   });
+
   const discountRate = Math.min(100, Math.max(0, Number($('discount').value) || 0));
   const discount = subtotal * discountRate / 100;
   const taxable = Math.max(0, subtotal - discount);
@@ -377,64 +641,37 @@ function calculate() {
 
 function renderTotals() {
   if (!$('items')) return;
-  const t = calculate();
-  $('subtotal').textContent = money(t.subtotal);
-  $('discountAmount').textContent = money(t.discount);
-  $('vatAmount').textContent = money(t.vat);
-  $('grandTotal').textContent = money(t.total);
-}
-
-function newQuote() {
-  if (!confirm('Start a new quotation? Download or save your current draft first if needed.')) return;
-  document.querySelectorAll('main input, main textarea').forEach(el => {
-    if (el.closest('#items')) return;
-    if (el.id === 'discount') el.value = 0;
-    else if (el.id === 'vatRate') el.value = 0;
-    else if (el.id === 'vatEnabled') el.checked = false;
-    else if (el.id === 'paymentTerms') el.value = 'As agreed in writing';
-    else if (el.id === 'terms') el.value = 'This quotation is subject to final confirmation of service availability, cargo details and agreed terms.';
-    else if (el.id === 'quoteNo' || el.id === 'quoteDate' || el.id === 'validUntil' || el.id === 'deliveryDate' || el.id === 'customer' || el.id === 'contact' || el.id === 'customerEmail' || el.id === 'customerPhone' || el.id === 'customerAddress' || el.id === 'businessAddress') el.value = '';
-  });
-  $('items').innerHTML = '';
-  $('quoteNo').value = makeQuoteNo();
-  setDefaultDates();
-  addItem();
+  const result = calculate();
+  $('subtotal').textContent = money(result.subtotal);
+  $('discountAmount').textContent = money(result.discount);
+  $('vatAmount').textContent = money(result.vat);
+  $('grandTotal').textContent = money(result.total);
 }
 
 function collectData() {
-  return {
-    quoteNo: $('quoteNo').value,
-    quoteDate: $('quoteDate').value,
-    validUntil: $('validUntil').value,
-    currency: $('currency').value,
-    businessAddress: $('businessAddress').value,
-    customer: $('customer').value,
-    contact: $('contact').value,
-    customerEmail: $('customerEmail').value,
-    customerPhone: $('customerPhone').value,
-    customerAddress: $('customerAddress').value,
-    discount: $('discount').value,
-    vatRate: $('vatRate').value,
-    vatEnabled: $('vatEnabled').checked,
-    paymentTerms: $('paymentTerms').value,
-    deliveryDate: $('deliveryDate').value,
-    terms: $('terms').value,
-    items: [...$('items').rows].map(row => {
-      const i = row.querySelectorAll('input');
-      return {description:i[0].value, qty:i[1].value, unit:i[2].value, rate:i[3].value};
-    })
-  };
+  const fields = [
+    'quoteNo','quoteDate','validUntil','currency','deliveryDate',
+    'legalName','businessAddress','customer','contact','customerEmail',
+    'customerPhone','customerAddress','discount','vatRate','vatEnabled',
+    'bankName','accountName','accountType','accountNumber','branchCode',
+    'paymentReference','paymentTerms','terms'
+  ];
+  const data = {};
+  fields.forEach(id => data[id] = $(id).type === 'checkbox' ? $(id).checked : $(id).value);
+  data.items = [...$('items').rows].map(row => {
+    const i = row.querySelectorAll('input');
+    return {description:i[0].value, qty:i[1].value, unit:i[2].value, rate:i[3].value};
+  });
+  return data;
 }
 
 function applyData(data) {
-  const simpleFields = [
-    'quoteNo','quoteDate','validUntil','businessAddress','customer',
-    'contact','customerEmail','customerPhone','customerAddress',
-    'discount','vatRate','paymentTerms','deliveryDate','terms'
-  ];
-  simpleFields.forEach(id => { if (data[id] !== undefined) $(id).value = data[id]; });
-  if (data.currency) $('currency').value = data.currency;
-  $('vatEnabled').checked = !!data.vatEnabled;
+  Object.keys(data).forEach(id => {
+    const el = $(id);
+    if (!el || id === 'items') return;
+    if (el.type === 'checkbox') el.checked = !!data[id];
+    else if (typeof data[id] !== 'object') el.value = data[id];
+  });
   $('items').innerHTML = '';
   (data.items || []).forEach(i => addItem(i.description, i.qty, i.unit, i.rate));
   if (!data.items || !data.items.length) addItem();
@@ -443,23 +680,24 @@ function applyData(data) {
 
 function saveDraft() {
   try {
-    localStorage.setItem('selafQuoteDraft', JSON.stringify(collectData()));
-    alert('Draft saved in this browser.');
-  } catch {
-    alert('Could not save the draft in this browser. Download the quotation data instead.');
-  }
-}
-function loadDraft() {
-  try {
-    const data = localStorage.getItem('selafQuoteDraft');
-    if (!data) return alert('No saved draft was found in this browser.');
-    if (confirm('Load the saved draft? This will replace the current form.')) applyData(JSON.parse(data));
-  } catch {
-    alert('Could not load the saved draft.');
+    localStorage.setItem('selafQuoteDraftV2', JSON.stringify(collectData()));
+    alert('Draft saved in this browser on this device.');
+  } catch(e) {
+    alert('Unable to save the draft. Please download the quotation data instead.');
   }
 }
 
-function downloadQuote() {
+function loadDraft() {
+  try {
+    const saved = localStorage.getItem('selafQuoteDraftV2');
+    if (!saved) return alert('No saved draft was found in this browser.');
+    if (confirm('Load the saved draft and replace the current form?')) applyData(JSON.parse(saved));
+  } catch(e) {
+    alert('Unable to load the saved draft.');
+  }
+}
+
+function downloadData() {
   const data = collectData();
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
@@ -467,18 +705,42 @@ function downloadQuote() {
   a.href = url;
   a.download = (data.quoteNo || 'SELAF-quotation') + '.json';
   a.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function printQuote() {
-  if (!$('customer').value.trim()) {
-    if (!confirm('Customer name is blank. Print this quotation anyway?')) return;
-  }
+  if (!$('customer').value.trim() &&
+      !confirm('Customer name is blank. Print anyway?')) return;
   window.print();
 }
 
+function newQuote() {
+  if (!confirm('Start a new quotation? Save or download your current quotation first.')) return;
+  const keep = [
+    'legalName','businessAddress','bankName','accountName','accountType',
+    'accountNumber','branchCode','paymentReference'
+  ];
+  const saved = {};
+  keep.forEach(id => saved[id] = $(id).value);
+
+  [
+    'customer','contact','customerEmail','customerPhone','customerAddress',
+    'deliveryDate'
+  ].forEach(id => $(id).value = '');
+  $('discount').value = 0;
+  $('vatRate').value = 0;
+  $('vatEnabled').checked = false;
+  $('paymentTerms').value = 'As agreed in writing';
+  $('terms').value = 'This quotation is subject to confirmation of cargo details, service availability, route, loading and offloading requirements, and agreed payment terms. Transport is arranged through approved third-party service providers where applicable. Any additional charges must be agreed with the customer.';
+  $('items').innerHTML = '';
+  Object.keys(saved).forEach(id => $(id).value = saved[id]);
+  $('quoteNo').value = makeQuoteNo();
+  setDates();
+  addItem();
+}
+
 $('quoteNo').value = makeQuoteNo();
-setDefaultDates();
+setDates();
 addItem('Transport service', 1, 'Trip', 0);
 </script>
 </body>
