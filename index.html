@@ -132,8 +132,17 @@ More Than Logistics — We Move Industries.</div>
 </div>
 <script>
 const KEY='selaf_operations_v1';
-const DEFAULTS={company:'SELAF – Smart Express Logistics & Fleet Management (Pty) Ltd.',registration:'2021/723490/07',email:'selaf.operations@outlook.com',phone:'065 759 1489 / 073 164 3987',vatNumber:'',banking:'',address:'',terms:'Rates are subject to final confirmation of cargo details, route, availability and any applicable accessorial charges. Transport may be performed by vetted third-party carriers. Collection and delivery 
-are subject to operational conditions and agreed instructions.'};
+
+const DEFAULTS = {
+  company: 'SELAF – Smart Express Logistics & Fleet Management (Pty) Ltd.',
+  registration: '2021/723490/07',
+  email: 'selaf.operations@outlook.com',
+  phone: '065 759 1489 / 073 164 3987',
+  vatNumber: '',
+  banking: '',
+  address: '',
+  terms: 'Rates are subject to final confirmation of cargo details, route, availability and any applicable accessorial charges. Transport may be performed by vetted third-party carriers. Collection and delivery are subject to operational conditions and agreed instructions.'
+};
 let db=loadDB(), currentView='dashboard', editType='', editId='';
 function loadDB(){try{const d=JSON.parse(localStorage.getItem(KEY)||'{}');return {settings:{...DEFAULTS,...(d.settings||{})},quotes:Array.isArray(d.quotes)?d.quotes:[],pos:Array.isArray(d.pos)?d.pos:[],bookings:Array.isArray(d.bookings)?d.bookings:[]}}catch(e){return {settings:{...DEFAULTS},quotes:[],pos:[],bookings:[]}}}
 function 
