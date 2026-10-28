@@ -3,256 +3,731 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101d35">
-<title>SELAF | Operations Portal</title>
+<meta name="theme-color" content="#10233f">
+<title>SELAF | Corporate Quotation</title>
 <style>
-:root{--navy:#101d35;--navy2:#172b4d;--red:#e53945;--blue:#63b8e8;--ink:#172033;--muted:#657187;--line:#dce3ed;--bg:#f3f6fb;--white:#fff;--green:#16835e;--amber:#a76509}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100vh}.topbar{background:linear-gradient(110deg,var(--navy),var(--navy2));color:#fff;padding:20px clamp(16px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:4px solid var(--red)}
-.brand{display:flex;align-items:center;gap:14px}.brand 
-img,.brand .logo-fallback{width:62px;height:62px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;flex:0 0 62px}.logo-fallback{display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:950;font-size:17px;letter-spacing:-1px;border:2px solid var(--red);line-height:1}.brand h1{font-size:1.35rem;letter-spacing:.06em;margin:0}.brand p{margin:2px 0 
-0;color:#c8d7ea;font-size:.88rem}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#fff;color:var(--navy);padding:9px 13px;border-radius:9px;font-weight:700}.btn.primary{background:var(--red);color:#fff;border-color:var(--red)}.btn.dark{background:var(--navy);color:#fff;border-color:var(--navy)}.btn.soft{background:#eaf5fc;border-color:#d0e9f7;color:#16466b}.btn.danger{color:#b4232e;border-color:#f1c8cb;background:#fff7f7}.btn.small{padding:6px 
-9px;font-size:.85rem}.wrap{max-width:1440px;margin:0 auto;padding:24px clamp(12px,3vw,36px) 50px}.welcome{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:20px}.welcome h2{margin:0;font-size:1.7rem;color:var(--navy)}.welcome p{margin:4px 0 0;color:var(--muted)}.local-note{font-size:.8rem;background:#fff7e8;color:#7d4b05;padding:8px 12px;border-radius:8px;border:1px solid #f1dfb9}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:#fff;padding:10px 15px;border-radius:10px;color:#40506a;font-weight:750}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:22px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px;box-shadow:0 3px 12px #172b4d08}.stat span{color:var(--muted);font-size:.86rem}.stat 
-strong{display:block;font-size:1.65rem;margin-top:5px;color:var(--navy)}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:20px;box-shadow:0 3px 12px #172b4d06;margin-bottom:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}.panel-head h3{margin:0;color:var(--navy);font-size:1.1rem}.muted{color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}.form-grid{display:grid;grid-template-colu
-mns:repeat(3,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:5px;min-width:0}.field.wide{grid-column:span 2}.field.full{grid-column:1/-1}.field label{font-size:.83rem;font-weight:750;color:#3b4960}.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid #cfd8e5;border-radius:8px;background:#fff;color:var(--ink);min-width:0}.field textarea{min-height:82px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid 
-#b7e2f8;border-color:var(--blue)}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;min-width:700px}th,td{padding:11px 12px;border-bottom:1px solid #e8edf4;text-align:left;vertical-align:middle}th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;background:#f7f9fc;color:#536078}td input,td select{width:100%;min-width:75px;border:1px solid #d5deea;border-radius:6px;padding:7px}tr:last-child 
-td{border-bottom:0}.num{text-align:right;white-space:nowrap}.totals{margin:16px 0 0 auto;max-width:360px}.total-row{display:flex;justify-content:space-between;padding:6px 0;gap:18px}.total-row.grand{font-size:1.2rem;font-weight:850;color:var(--navy);border-top:2px solid var(--navy);margin-top:6px;padding-top:12px}.badge{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:.78rem;font-weight:800;background:#edf1f6;color:#4b596e}.badge.green{background:#e1f6ed;color:#126b4b}.badge.blue{background:#e4f3fd;color:#1e5b
-82}.badge.amber{background:#fff0d7;color:#88530a}.badge.red{background:#ffe5e6;color:#a11f2a}.empty{text-align:center;color:var(--muted);padding:28px}.record-list{display:grid;gap:10px}.record{border:1px solid var(--line);border-radius:10px;padding:13px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.record strong{display:block;color:var(--navy)}.record small{color:var(--muted)}.hidden{display:none!important}.subhead{font-size:.9rem;font-weight:850;color:var(--navy);margin:20px 0 
-10px;padding-bottom:7px;border-bottom:1px solid var(--line)}.footer{text-align:center;color:#788397;font-size:.8rem;padding:20px}.hint{font-size:.82rem;color:var(--muted);margin:6px 0 0}.inline-check{display:flex;align-items:center;gap:8px;padding:9px 0}.inline-check input{width:auto}.checklist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.check-item{display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fbfcfe;font-size:.9rem}.check-item 
-input{width:auto;margin-top:4px;flex:0 0 auto}.check-item span{line-height:1.35}@media(max-width:560px){.checklist-grid{grid-template-columns:1fr}}
-@media(max-width:850px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.full{grid-column:1/-1}}
-@media(max-width:560px){.stats{grid-template-columns:1fr 1fr;gap:8px}.stat{padding:12px}.stat strong{font-size:1.3rem}.form-grid{grid-template-columns:1fr}.field.wide,.field.full{grid-column:1}.panel{padding:14px}.bra
-nd img,.brand .logo-fallback{width:48px;height:48px;flex-basis:48px}.brand h1{font-size:1.1rem}.welcome h2{font-size:1.4rem}}
-@media print{body{background:#fff}body>*:not(#printSheet){display:none!important}#printSheet{display:block!important}.topbar,.welcome,.tabs,.stats,.no-print,.footer{display:none!important}.wrap{padding:0;max-width:none}.panel{box-shadow:none;border:0;padding:0}.print-only{display:block!important}.print-header{display:flex;align-items:center;gap:15px;border-botto
-m:3px solid var(--red);padding-bottom:15px;margin-bottom:20px}.print-header img,.print-header .logo-fallback{width:70px;height:70px;object-fit:contain;flex:0 0 70px}.print-header .logo-fallback{display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:19px;font-weight:950;border:2px solid var(--red);border-radius:8px}.print-header h1{margin:0;color:var(--navy)}.print-header p{margin:3px 0}.print-doc-title{font-size:1.5rem;font-weight:900;color:var(--navy);margin:18px 
-0}.table-wrap{overflow:visible}table{min-width:0}th,td{padding:7px;font-size:10pt}.field input,.field select,.field textarea{border:0;padding:2px}.form-grid{gap:8px}.panel-head .actions{display:none}}
-.print-only{display:none}.load-checklist-print{page-break-before:always;break-before:page}
+:root {
+--navy: #10233f;
+--navy2: #1c3555;
+--red: #c92e3b;
+--blue: #6cabc9;
+--ink: #263548;
+--muted: #718096;
+--line: #dfe5ec;
+--paper: #fff;
+--bg: #eef2f6;
+}
+• { box-sizing: border-box; }
+body {
+margin: 0;
+color: var(--ink);
+background: var(--bg);
+font: 14px/1.5 Arial, Helvetica, sans-serif;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.topbar {
+background: var(--navy);
+border-bottom: 4px solid var(--red);
+color: white;
+padding: 20px max(20px, calc((100% - 1060px)/2));
+}
+.brand {
+display: flex;
+align-items: center;
+gap: 13px;
+}
+.brand img {
+width: 57px;
+height: 57px;
+display: block;
+object-fit: contain;
+background: transparent;
+}
+.brand-name {
+font-size: 26px;
+font-weight: 800;
+letter-spacing: 2.5px;
+}
+.brand-sub {
+color: #d6e1ee;
+font-size: 11px;
+letter-spacing: 1.2px;
+margin-top: 2px;
+}
+.brand-tag {
+color: #9ecde2;
+font-size: 11px;
+margin-top: 5px;
+}
+main {
+max-width: 1060px;
+margin: 28px auto;
+padding: 0 16px;
+}
+.panel {
+background: var(--paper);
+border: 1px solid var(--line);
+border-radius: 9px;
+padding: 23px;
+margin-bottom: 18px;
+}
+.section-title {
+color: var(--navy);
+font-size: 13px;
+font-weight: 800;
+letter-spacing: 1.2px;
+text-transform: uppercase;
+padding-bottom: 12px;
+border-bottom: 1px solid var(--line);
+margin: 0 0 17px;
+}
+.quote-heading {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 18px;
+flex-wrap: wrap;
+}
+.quote-heading h1 {
+color: var(--navy);
+font-size: 29px;
+letter-spacing: 2px;
+margin: 0 0 4px;
+}
+.accent-line {
+height: 3px;
+width: 54px;
+background: var(--red);
+margin-top: 10px;
+}
+.quote-no {
+min-width: 205px;
+border-left: 3px solid var(--red);
+padding: 3px 0 3px 14px;
+}
+.quote-no label, .field label {
+display: block;
+color: var(--muted);
+font-size: 11px;
+font-weight: 700;
+margin-bottom: 5px;
+}
+.quote-no input {
+font-weight: 700;
+color: var(--navy);
+font-size: 15px;
+}
+.grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 15px 20px;
+}
+.field { min-width: 0; }
+.field input, .field textarea, .field select,
+.quote-no input, .bank-grid input {
+width: 100%;
+border: 1px solid #d9e1e9;
+border-radius: 4px;
+background: #fff;
+padding: 10px;
+color: var(--ink);
+outline-color: var(--blue);
+}
+.field textarea { resize: vertical; min-height: 70px; }
+.wide { grid-column: 1 / -1; }
+.company-name-input {
+font-weight: 700;
+color: var(--navy) !important;
+}
+.mini-label {
+color: var(--muted);
+font-size: 10px;
+font-weight: 700;
+letter-spacing: .7px;
+text-transform: uppercase;
+margin-bottom: 4px;
+}
+.company-details {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px 24px;
+}
+.company-details .detail { overflow-wrap: anywhere; }
+.company-details strong {
+display: block;
+font-size: 12px;
+color: var(--navy);
+margin-bottom: 3px;
+}
+.company-details span {
+color: #59697d;
+font-size: 12px;
+}
+.table-wrap { overflow-x: auto; }
+table {
+width: 100%;
+border-collapse: collapse;
+min-width: 620px;
+}
+thead { background: var(--navy); color: white; }
+th {
+font-size: 10px;
+letter-spacing: .5px;
+text-transform: uppercase;
+text-align: left;
+padding: 12px 9px;
+}
+td { padding: 9px 7px; border-bottom: 1px solid var(--line); }
+td input {
+width: 100%;
+min-width: 60px;
+padding: 9px 7px;
+border: 1px solid #dfe5ec;
+border-radius: 4px;
+}
+td:first-child input { min-width: 155px; }
+.right { text-align: right; white-space: nowrap; }
+.summary {
+margin: 19px 0 0 auto;
+max-width: 360px;
+}
+.total-row {
+display: flex;
+justify-content: space-between;
+gap: 15px;
+padding: 8px 0;
+border-bottom: 1px solid var(--line);
+}
+.total-row strong { color: var(--navy); }
+.grand-total {
+background: var(--navy);
+color: white;
+padding: 15px;
+margin-top: 7px;
+border-bottom: 3px solid var(--red);
+display: flex;
+justify-content: space-between;
+gap: 12px;
+font-size: 17px;
+font-weight: 800;
+}
+.bank-box {
+border: 1px solid var(--line);
+border-top: 3px solid var(--navy);
+padding: 17px;
+background: #fafbfd;
+}
+.bank-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px 18px;
+}
+.bank-grid label {
+display: block;
+color: var(--muted);
+font-size: 10px;
+font-weight: 700;
+text-transform: uppercase;
+margin-bottom: 4px;
+}
+.bank-grid input {
+font-size: 12px;
+padding: 8px;
+}
+.terms-text {
+color: #526176;
+font-size: 12px;
+line-height: 1.7;
+}
+.terms-text textarea { width: 100%; }
+.signature {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 35px;
+margin-top: 25px;
+}
+.signature div {
+border-top: 1px solid #aeb9c7;
+padding-top: 8px;
+color: var(--muted);
+font-size: 11px;
+}
+.actions {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-bottom: 18px;
+}
+.btn {
+padding: 11px 15px;
+border: 0;
+border-radius: 4px;
+font-size: 12px;
+font-weight: 700;
+}
+.btn-red { background: var(--red); color: white; }
+.btn-navy { background: var(--navy); color: white; }
+.btn-light { background: #e1e8f0; color: var(--navy); }
+.footer {
+text-align: center;
+color: var(--muted);
+font-size: 10px;
+letter-spacing: .6px;
+padding: 20px;
+}
+@media(max-width:600px) {
+main { margin: 14px auto; padding: 0 9px; }
+.panel { padding: 15px; }
+.grid, .company-details, .bank-grid { grid-template-columns: 1fr; }
+.wide { grid-column: auto; }
+.brand img { width: 47px; height: 47px; }
+.brand-name { font-size: 22px; }
+.quote-heading h1 { font-size: 25px; }
+}
+@page { size: A4; margin: 12mm; }
+@media print {
+body { background: white; font-size: 10px; }
+.topbar {
+padding: 12px 0;
+-webkit-print-color-adjust: exact;
+print-color-adjust: exact;
+}
+.brand img { width: 45px; height: 45px; }
+.brand-name { font-size: 22px; }
+main { max-width: none; margin: 12px 0; padding: 0; }
+.panel {
+padding: 12px;
+margin-bottom: 9px;
+border: 1px solid #dfe5ec;
+border-radius: 0;
+box-shadow: none;
+break-inside: avoid;
+}
+.no-print { display: none !important; }
+input, textarea, select {
+border: none !important;
+border-radius: 0;
+padding: 2px 0 !important;
+background: transparent !important;
+color: #263548 !important;
+resize: none;
+appearance: none;
+}
+.quote-no { min-width: 160px; }
+th, .grand-total, .topbar {
+-webkit-print-color-adjust: exact;
+print-color-adjust: exact;
+}
+th { padding: 8px 5px; }
+td { padding: 5px 4px; }
+td:first-child input { min-width: 0; }
+table { min-width: 0; }
+.bank-box { background: white; padding: 10px; }
+.bank-grid input { padding: 2px 0 !important; }
+.footer { padding: 8px 0 0; }
+.section-title { margin-bottom: 10px; padding-bottom: 7px; }
+.signature { margin-top: 18px; }
+}
 </style>
 </head>
 <body>
-<div class="app">
+
 <header class="topbar">
-  <div class="brand">
-    <img 
-src="./SELAF_Standalone_Logo_High_Quality.png" alt="SELAF logo" onerror="this.outerHTML='<div class=\"logo-fallback\" aria-label=\"SELAF logo\">SELAF</div>'">
-    <div><h1>SELAF OPERATIONS PORTAL</h1><p>Smart Express Logistics &amp; Fleet Management</p></div>
-  </div>
-  <div class="top-actions no-print">
-    <button class="btn" id="exportDataBtn">Export backup</button>
-    <button class="btn" id="importDataBtn">Import backup</button>
-    <input id="importFile" 
-type="file" accept="application/json,.json" class="hidden">
-  </div>
-</header>
-<main class="wrap">
-  <div class="welcome">
-    <div><h2 id="pageTitle">Operations overview</h2><p>Quotations, supplier purchase orders and third-party transport bookings in one place.</p></div>
-    <div class="local-note">Local storage is enabled · Records stay in this browser on this device</div>
-  </div>
-  <div class="stats" id="stats"></div>
-  <nav class="tabs no-print" 
-aria-label="Main sections">
-    <button class="tab active" data-view="dashboard">Overview</button>
-    <button class="tab" data-view="quotes">Quotations</button>
-    <button class="tab" data-view="pos">Purchase orders</button>
-    <button class="tab" data-view="bookings">Transport bookings</button>
-    <button class="tab" data-view="settings">Company settings</button>
-  </nav>
-
-  <section id="view-dashboard" 
-class="view">
-    <div class="panel">
-      <div class="panel-head"><h3>Quick actions</h3></div>
-      <div class="actions no-print">
-        <button class="btn primary" onclick="newRecord('quote')">+ Create quotation</button>
-        <button class="btn primary" onclick="newRecord('po')">+ Create purchase order</button>
-        <button class="btn primary" onclick="newRecord('booking')">+ New transport booking</button>
-      </div>
-      <p class="hint">Use transport bookings to record customer loads and the subcontracted carrier. Create purchase orders to issue 
-work or procurement instructions to suppliers and transport partners.</p>
-    </div>
-    <div class="panel"><div class="panel-head"><h3>Recent activity</h3><span class="muted">Latest saved records</span></div><div id="recentRecords" class="record-list"></div></div>
-  </section>
-
-  <section id="view-quotes" class="view hidden">
-    <div id="quotesList" class="panel">
-      <div class="panel-head"><h3>Quotations</h3><button 
-class="btn primary" onclick="newRecord('quote')">+ New quotation</button></div>
-      <div class="record-list" id="quoteRecords"></div>
-    </div>
-    <div id="quoteEditor" class="panel hidden"></div>
-  </section>
-
-  <section id="view-pos" class="view hidden">
-    <div id="posList" class="panel">
-      <div class="panel-head"><h3>Purchase orders</h3><button class="btn primary" onclick="newRecord('po')">+ New purchase order</button></div>
-      <div class="record-list" 
-id="poRecords"></div>
-    </div>
-    <div id="poEditor" class="panel hidden"></div>
-  </section>
-
-  <section id="view-bookings" class="view hidden">
-    <div id="bookingsList" class="panel">
-      <div class="panel-head"><h3>Transport bookings</h3><button class="btn primary" onclick="newRecord('booking')">+ New booking</button></div>
-      <div class="record-list" id="bookingRecords"></div>
-    </div>
-    <div id="bookingEditor" 
-class="panel hidden"></div>
-  </section>
-
-  <section id="view-settings" class="view hidden">
-    <div class="panel">
-      <div class="panel-head"><h3>Company settings</h3><span class="badge blue">Used on new documents</span></div>
-      <form id="settingsForm">
-        <div class="form-grid">
-          <div class="field"><label>Company name</label><input name="company" value="SELAF – Smart Express Logistics & Fleet Management (Pty) Ltd."></div>
-          <div 
-class="field"><label>Registration number</label><input name="registration" value="2021/723490/07"></div>
-          <div class="field"><label>Email</label><input name="email" type="email" value="selaf.operations@outlook.com"></div>
-          <div class="field"><label>Telephone</label><input name="phone" value="065 759 1489 / 073 164 3987"></div>
-          <div class="field"><label>VAT number (optional)</label><input name="vatNumber" placeholder="Enter if VAT registered"></div>
-          <div 
-class="field"><label>Banking details</label><input name="banking" placeholder="Bank, account name and details"></div>
-          <div class="field full"><label>Business address</label><input name="address" placeholder="Enter registered/business address"></div>
-          <div class="field full"><label>Default terms and conditions</label><textarea name="terms">Rates are subject to final confirmation of cargo details, route, availability and any applicable accessorial charges. Transport may be performed by vetted third-party carriers. 
-Collection and delivery are subject to operational conditions and agreed instructions.</textarea></div>
-        </div>
-        <div class="actions" style="margin-top:16px"><button class="btn primary" type="submit">Save company settings</button></div>
-      </form>
-      <p class="hint">Only enter banking or registration details that you want printed on your documents. Settings are saved in this browser.</p>
-    </div>
-  </section>
-  <div class="footer">SELAF · 
-More Than Logistics — We Move Industries.</div>
-</main>
+<div class="brand">
+<img src="./SELAF_Standalone_Logo_High_Quality.png" alt="SELAF logo icon">
+<div>
+<div class="brand-name">SELAF</div>
+<div class="brand-sub">SMART EXPRESS LOGISTICS & FLEET MANAGEMENT</div>
+<div class="brand-tag">More Than Logistics — We Move Industries.</div>
 </div>
-<script>
-const KEY='selaf_operations_v1';
+</div>
+</header>
 
-const DEFAULTS = {
-  company: 'SELAF – Smart Express Logistics & Fleet Management (Pty) Ltd.',
-  registration: '2021/723490/07',
-  email: 'selaf.operations@outlook.com',
-  phone: '065 759 1489 / 073 164 3987',
-  vatNumber: '',
-  banking: '',
-  address: '',
-  terms: 'Rates are subject to final confirmation of cargo details, route, availability and any applicable accessorial charges. Transport may be performed by vetted third-party carriers. Collection and delivery are subject to operational conditions and agreed instructions.'
-    
-let db=loadDB(), currentView='dashboard', editType='', editId='';
-function loadDB(){try{const d=JSON.parse(localStorage.getItem(KEY)||'{}');return {settings:{...DEFAULTS,...(d.settings||{})},quotes:Array.isArray(d.quotes)?d.quotes:[],pos:Array.isArray(d.pos)?d.pos:[],bookings:Array.isArray(d.bookings)?d.bookings:[]}}catch(e){return {settings:{...DEFAULTS},quotes:[],pos:[],bookings:[]}}}
-function 
-saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
-function esc(v=''){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(v){return new Intl.NumberFormat('en-ZA',{style:'currency',currency:'ZAR'}).format(Number(v)||0)}
-function today(){return new Date().toISOString().slice(0,10)}
-function nextRef(type){const arr=type==='quote'?db.quotes:type==='po'?db.pos:db.bookings;const 
-prefix=type==='quote'?'SELAF-Q':type==='po'?'SELAF-PO':'SELAF-TB';let max=0;arr.forEach(x=>{const n=parseInt(String(x.ref||'').split('-').pop(),10);if(Number.isFinite(n))max=Math.max(max,n)});return prefix+'-'+String(max+1).padStart(5,'0')}
-function allRecords(){return [...db.quotes.map(x=>({...x,type:'quote'})),...db.pos.map(x=>({...x,type:'po'})),...db.bookings.map(x=>({...x,type:'booking'}))].sort((a,b)=>(b.updated||b.date||'').localeCompare(a.updated||a.date||''))}
-function 
-setView(view){currentView=view;document.querySelectorAll('.view').forEach(x=>x.classList.add('hidden'));document.getElementById('view-'+view).classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('pageTitle').textContent=({dashboard:'Operations overview',quotes:'Quotation management',pos:'Purchase order management',bookings:'Transport booking management',settings:'Company settings'})[view];renderAll()}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-function newRecord(type){editType=type;editId='';setView(type==='quote'?'quotes':type==='po'?'pos':'bookings');showEditor(type,null)}
-function editRecord(type,id){const arr=type==='quote'?db.quotes:type==='po'?db.pos:db.bookings;const record=arr.find(x=>x.id===id);if(!record)return;editType=type;editId=id;setView(type==='quote'?'quotes':type==='po'?'pos':'bookings');showEditor(type,record)}
-function statusBadge(status){let 
-cls='';if(['Approved','Delivered','Completed','Paid'].includes(status))cls='green';else if(['Sent','Assigned','In transit','Collected'].includes(status))cls='blue';else if(['Cancelled','Rejected'].includes(status))cls='red';else if(['Pending','Awaiting carrier','Awaiting approval'].includes(status))cls='amber';return `<span class="badge ${cls}">${esc(status||'Draft')}</span>`}
-function recordCard(x,type){let subtitle='',amount='';if(type==='quote'||type==='po')amount=money(calcTotals(x).total);if(type==='quote')subtitle=`${esc(x.customer||'No customer')} · 
-${esc(x.date||'')}`;if(type==='po')subtitle=`Supplier: ${esc(x.supplier||'Not set')} · ${esc(x.date||'')}`;if(type==='booking'){subtitle=`${esc(x.origin||'Origin not set')} → ${esc(x.destination||'Destination not set')} · ${esc(x.collectionDate||'')}`;amount=''}const typeLabel=type==='quote'?'Quotation':type==='po'?'Purchase order':'Transport booking';return `<div class="record"><div><strong>${esc(x.ref)} · ${typeLabel}</strong><small>${subtitle}</small><div 
-style="margin-top:6px">${statusBadge(x.status)}</div></div><div class="actions"><strong>${amount}</strong><button class="btn small" onclick="editRecord('${type}','${x.id}')">Open / edit</button><button class="btn small" onclick="printRecord('${type}','${x.id}')">Print</button></div></div>`}
-function renderList(id,arr,type){const el=document.getElementById(id);el.innerHTML=arr.length?arr.slice().sort((a,b)=>(b.updated||b.date||'').localeCompare(a.updated||a.date||'')).map(x=>recordCard(x,type)).join(''):'<div class="empty">No records yet. 
-Select the button above to create your first record.</div>'}
-function renderAll(){renderStats();renderList('quoteRecords',db.quotes,'quote');renderList('poRecords',db.pos,'po');renderList('bookingRecords',db.bookings,'booking');const recent=allRecords().slice(0,6);document.getElementById('recentRecords').innerHTML=recent.length?recent.map(x=>recordCard(x,x.type)).join(''):'<div class="empty">Your saved quotations, purchase orders and transport bookings will appear here.</div>';fillSettings()}
-function renderStats(){const 
-active=db.bookings.filter(x=>!['Completed','Cancelled'].includes(x.status)).length;const totalQuotes=db.quotes.length;const totalPO=db.pos.length;const totalValue=db.quotes.reduce((s,q)=>s+calcTotals(q).total,0);document.getElementById('stats').innerHTML=`<div class="stat"><span>Quotations created</span><strong>${totalQuotes}</strong></div><div class="stat"><span>Purchase orders</span><strong>${totalPO}</strong></div><div class="stat"><span>Active transport bookings</span><strong>${active}</strong></div><div class="stat"><span>Quotation value (incl. VAT)</span><strong 
-style="font-size:1.25rem">${money(totalValue)}</strong></div>`}
-function fillSettings(){const f=document.getElementById('settingsForm');if(!f)return;Object.entries(db.settings).forEach(([k,v])=>{if(f.elements[k]&&document.activeElement!==f.elements[k])f.elements[k].value=v})}
-document.getElementById('settingsForm').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);Object.keys(DEFAULTS).forEach(k=>db.settings[k]=String(f.get(k)||''));saveDB();alert('Company settings saved in this browser.')});
-function 
-lineRows(items,editable=true){return (items||[]).map((it,i)=>`<tr><td>${editable?`<input data-item="${i}" data-key="description" value="${esc(it.description)}" placeholder="Item / service">`:esc(it.description)}</td><td>${editable?`<input data-item="${i}" data-key="qty" type="number" min="0" step="any" value="${esc(it.qty)}">`:esc(it.qty)}</td><td>${editable?`<input data-item="${i}" data-key="unit" value="${esc(it.unit||'unit')}" placeholder="unit">`:esc(it.unit||'unit')}</td><td class="num">${editable?`<input data-item="${i}" data-key="price" 
-type="number" min="0" step="0.01" value="${esc(it.price)}">`:money(it.price)}</td><td class="num">${money((Number(it.qty)||0)*(Number(it.price)||0))}</td>${editable?`<td><button class="btn small danger" type="button" onclick="removeLine(${i})">×</button></td>`:''}</tr>`).join('')}
-function calcTotals(r){const subtotal=(r.items||[]).reduce((s,x)=>s+(Number(x.qty)||0)*(Number(x.price)||0),0);const discount=Math.max(0,Number(r.discount)||0);const after=Math.max(0,subtotal-discount);const 
-vat=r.vatEnabled?after*(Number(r.vatRate??15)/100):0;return {subtotal,discount,after,vat,total:after+vat}}
-const LOAD_CHECKS=[['chains','Load chains'],['binders','Chain binders / tensioners'],['ratchetStraps','Ratchet straps / webbing'],['edgeProtectors','Corner / edge protectors'],['dunnage','Dunnage / timber blocks'],['tarpaulin','Tarpaulin / weather cover (if required)'],['loadBars','Load bars / cargo restraints (if required)'],['twistLocks','Container twist-locks (if applicable)'],['palletJacks','Pallet 
-jack / handling equipment (if required)'],['spareWheel','Serviceable spare wheel and tools'],['fireExtinguisher','Serviceable fire extinguisher'],['ppe','Driver PPE: safety boots, hi-vis vest, hard hat'],['roadworthy','Valid roadworthy / vehicle documents'],['driverDocs','Driver licence and required permits'],['loadSecurement','Load secured and checked before departure']];
-function checklistHTML(saved={}){return `<div class="checklist-grid">${LOAD_CHECKS.map(([key,label])=>`<label class="check-item"><input type="checkbox" data-check="${key}" 
-${saved&&saved[key]?'checked':''}><span>${label}</span></label>`).join('')}</div>`}
-function checklistPrint(saved={}){return `<div class="table-wrap"><table style="min-width:0"><thead><tr><th>Load readiness item</th><th>Required / checked</th></tr></thead><tbody>${LOAD_CHECKS.map(([key,label])=>`<tr><td>${label}</td><td>${saved&&saved[key]?'☑ Checked':'☐ Not checked'}</td></tr>`).join('')}</tbody></table></div><p><b>Load check:</b> Items marked not checked must be assessed and supplied where required for the specific cargo, vehicle and site rules. This 
-checklist does not replace legal, site-specific or cargo-specific requirements.</p>`}
-function showEditor(type,r){const isQuote=type==='quote',isPO=type==='po',target=document.getElementById(isQuote?'quoteEditor':isPO?'poEditor':'bookingEditor');target.classList.remove('hidden');document.getElementById(isQuote?'quotesList':isPO?'posList':'bookingsList').classList.add('hidden');const d=r||{id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),ref:nextRef(type),date:today(),status:'Draft',items:[{description:'',qty:1,unit:'unit',price:0}],discount:0,vatEnabled:false,vatRate:15,terms:db.settings.terms};co
-nst title=isQuote?'Quotation':isPO?'Purchase order':'Transport booking';
-if(type==='booking'){target.innerHTML=`<div class="panel-head"><h3>${r?'Edit':'New'} carrier transport order</h3><div class="actions"><button class="btn" onclick="cancelEditor('booking')">Back</button></div></div><p class="hint">This is an instruction to your subcontracted carrier to provide a vehicle and load the cargo. It does not show your customer selling price or margin.</p><form id="recordForm"><div class="form-grid">
-${field('Transport order 
-reference','ref',d.ref)}${field('Order date','date',d.date,'date')}${selectField('Status','status',['Draft','Awaiting carrier','Vehicle confirmed','Assigned','Collected','In transit','Delivered','Completed','Cancelled'],d.status)}
-${field('Carrier / transport company','carrier',d.carrier||'')}${field('Carrier dispatcher / contact','carrierContact',d.carrierContact||'')}${field('Carrier booking reference','carrierRef',d.carrierRef||'')}
-${field('Collection location / site','origin',d.origin||'')}${field('Delivery location / site','destination',d.destination||'')}${field('Collection 
-date','collectionDate',d.collectionDate||today(),'date')}
-${field('Required delivery date','deliveryDate',d.deliveryDate||'','date')}${selectField('Vehicle / trailer required','vehicleType',['1–5 ton','8 ton','14 ton','Superlink 34–36 ton','Tri-axle','Flatbed','Tautliner','Curtainsider','Refrigerated','Tanker','Lowbed','Courier / express','Other'],d.vehicleType||'Superlink 34–36 ton')}${field('Cargo weight (tonnes)','weight',d.weight||'','number')}
-${field('Customer / collection contact','customer',d.customer||'')}${field('Contact 
-number','customerContact',d.customerContact||'')}${field('Customer PO / load reference','customerRef',d.customerRef||'')}
-${field('Cargo description','cargo',d.cargo||'')}${field('Pallets / pieces / packages','pieces',d.pieces||'','number')}${field('Vehicle registration / driver','vehicleDetails',d.vehicleDetails||'')}
-${field('Carrier quoted cost (internal only, R)','carrierCost',d.carrierCost||0,'number')}${field('SELAF booking contact','selafContact',d.selafContact||'')}${field('POD / delivery 
-reference','podRef',d.podRef||'')}
-${textareaField('Special loading / delivery instructions','instructions',d.instructions||'')}${textareaField('Operational notes (internal)','notes',d.notes||'')}
-</div><div class="subhead">Vehicle and load equipment checklist</div><p class="hint">Tick each item once confirmed available and suitable. Some items are conditional depending on cargo, trailer, route and site rules.</p>${checklistHTML(d.checklist||{})}<div class="actions" style="margin-top:18px"><button class="btn primary" type="submit">Save carrier 
-order</button><button class="btn" type="button" onclick="printForm('booking')">Print carrier order + checklist</button>${r?`<button class="btn danger" type="button" onclick="deleteRecord('booking','${d.id}')">Delete</button>`:''}</div></form>`;
-}else{const partyLabel=isQuote?'Customer':'Supplier / carrier';target.innerHTML=`<div class="panel-head"><h3>${r?'Edit':'New'} ${title.toLowerCase()}</h3><div class="actions"><button class="btn" onclick="cancelEditor('${type}')">Back to 
-list</button></div></div><form id="recordForm"><div class="form-grid">
-${field(isQuote?'Quotation number':'PO number','ref',d.ref)}${field('Document date','date',d.date,'date')}${selectField('Status','status',isQuote?['Draft','Sent','Approved','Rejected','Expired']:['Draft','Awaiting approval','Approved','Sent','Partially received','Delivered','Cancelled'],d.status)}
-${field(partyLabel+' name',isQuote?'customer':'supplier',d[isQuote?'customer':'supplier']||'')}${field('Contact 
-person','contact',d.contact||'')}${field('Email / telephone','contactDetails',d.contactDetails||'')}
-${field('Delivery / service address','deliveryAddress',d.deliveryAddress||'')}${field('Reference / project','reference',d.reference||'')}${field('Valid until / required by','dueDate',d.dueDate||'','date')}
-</div><div class="subhead">Line items</div><div class="table-wrap"><table><thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Unit price (R)</th><th class="num">Line total</th><th></th></tr></thead><tbody 
-id="itemsBody">${lineRows(d.items||[],true)}</tbody></table></div><div class="actions no-print" style="margin-top:10px"><button class="btn soft" type="button" onclick="addLine()">+ Add line item</button></div>
-<div class="form-grid" style="margin-top:18px">${field('Discount (R)','discount',d.discount||0,'number')}${field('VAT rate (%)','vatRate',d.vatRate??15,'number')}<div class="field"><label>VAT</label><label class="inline-check"><input type="checkbox" name="vatEnabled" ${d.vatEnabled?'checked':''}> Add 
-VAT to this document</label></div>${textareaField('Terms and conditions','terms',d.terms||db.settings.terms)}</div>
-<div class="totals" id="totalsBox"></div><div class="actions" style="margin-top:18px"><button class="btn primary" type="submit">Save ${isQuote?'quotation':'purchase order'}</button><button class="btn" type="button" onclick="printForm('${type}')">Print / save PDF</button><button class="btn" type="button" onclick="downloadCurrentJSON('${type}')">Download JSON</button>${r?`<button class="btn danger" type="button" 
-onclick="deleteRecord('${type}','${d.id}')">Delete</button>`:''}</div></form>`;
-target.querySelectorAll('[data-item]').forEach(inp=>inp.addEventListener('input',updateTotals));target.querySelector('[name="discount"]').addEventListener('input',updateTotals);target.querySelector('[name="vatRate"]').addEventListener('input',updateTotals);target.querySelector('[name="vatEnabled"]').addEventListener('change',updateTotals);updateTotals();
+<main>
+<section class="panel">
+<div class="quote-heading">
+<div>
+<h1>QUOTATION</h1>
+<div class="mini-label">Commercial offer</div>
+<div class="accent-line"></div>
+</div>
+<div class="quote-no">
+<label for="quoteNo">QUOTATION NUMBER</label>
+<input id="quoteNo">
+</div>
+</div>
+<div class="grid" style="margin-top:22px">
+<div class="field">
+<label for="quoteDate">Quotation date</label>
+<input id="quoteDate" type="date">
+</div>
+<div class="field">
+<label for="validUntil">Valid until</label>
+<input id="validUntil" type="date">
+</div>
+<div class="field">
+<label for="currency">Currency</label>
+<select id="currency" onchange="renderTotals()">
+<option value="ZAR">ZAR — South African Rand</option>
+<option value="USD">USD — US Dollar</option>
+<option value="ZMW">ZMW — Zambian Kwacha</option>
+<option value="CDF">CDF — Congolese Franc</option>
+</select>
+</div>
+<div class="field">
+<label for="deliveryDate">Estimated service date</label>
+<input id="deliveryDate" type="date">
+</div>
+</div>
+</section>
+
+<section class="panel">
+<h2 class="section-title">From · Service provider</h2>
+<div class="field" style="margin-bottom:17px">
+<label for="legalName">Registered company name</label>
+<input class="company-name-input" id="legalName"
+value="SELAF - Smart Express Logistics & Fleet Management (Pty) Ltd.">
+</div>
+<div class="company-details">
+<div class="detail">
+<strong>Registration number</strong>
+<span>2021/723490/07</span>
+</div>
+<div class="detail">
+<strong>Email</strong>
+<span>selaf.operations@outlook.com</span>
+</div>
+<div class="detail">
+<strong>Telephone</strong>
+<span>065 759 1489 / 073 164 3987</span>
+</div>
+<div class="detail">
+<strong>Business address</strong>
+<span>
+<input id="businessAddress"
+value="Boundary Road — ADD SUBURB, CITY AND POSTAL CODE"
+aria-label="Business address"
+style="width:100%;border:1px solid #d9e1e9;padding:7px;border-radius:4px">
+</span>
+</div>
+</div>
+</section>
+
+<section class="panel">
+<h2 class="section-title">Customer · Bill to</h2>
+<div class="grid">
+<div class="field">
+<label for="customer">Customer / company name</label>
+<input id="customer" placeholder="Customer's registered name">
+</div>
+<div class="field">
+<label for="contact">Contact person</label>
+<input id="contact" placeholder="Contact person">
+</div>
+<div class="field">
+<label for="customerEmail">Email address</label>
+<input id="customerEmail" type="email" placeholder="Customer email">
+</div>
+<div class="field">
+<label for="customerPhone">Telephone</label>
+<input id="customerPhone" placeholder="Customer telephone">
+</div>
+<div class="field wide">
+<label for="customerAddress">Billing address / collection and delivery details</label>
+<textarea id="customerAddress" placeholder="Customer address, collection point, destination or route"></textarea>
+</div>
+</div>
+</section>
+
+<section class="panel">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px">
+<h2 class="section-title" style="border:0;padding:0;margin:0">Services & charges</h2>
+<button class="btn btn-red no-print" onclick="addItem()">+ Add item</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Qty</th>
+<th>Unit</th>
+<th>Rate</th>
+<th class="right">Amount</th>
+<th class="no-print">Remove</th>
+</tr>
+</thead>
+<tbody id="items"></tbody>
+</table>
+</div>
+<div class="grid no-print" style="margin-top:16px">
+<div class="field">
+<label for="discount">Discount (%)</label>
+<input id="discount" type="number" min="0" max="100" value="0" oninput="renderTotals()">
+</div>
+<div class="field">
+<label for="vatRate">VAT rate (%)</label>
+<input id="vatRate" type="number" min="0" max="100" value="0" oninput="renderTotals()">
+<label style="display:flex;align-items:center;gap:8px;margin-top:9px;color:#526176;font-size:12px">
+<input id="vatEnabled" type="checkbox" style="width:auto" onchange="renderTotals()">
+Apply VAT where applicable
+</label>
+</div>
+</div>
+<div class="summary">
+<div class="total-row"><span>Subtotal</span><strong id="subtotal">R 0.00</strong></div>
+<div class="total-row"><span>Discount</span><strong id="discountAmount">R 0.00</strong></div>
+<div class="total-row"><span>VAT</span><strong id="vatAmount">R 0.00</strong></div>
+<div class="grand-total"><span>TOTAL DUE</span><span id="grandTotal">R 0.00</span></div>
+</div>
+</section>
+
+<section class="panel">
+<h2 class="section-title">Banking details · Payment information</h2>
+<div class="bank-box">
+<div class="bank-grid">
+<div>
+<label for="bankName">Bank name</label>
+<input id="bankName" value="ADD BANK NAME">
+</div>
+<div>
+<label for="accountName">Account holder</label>
+<input id="accountName" value="SELAF - Smart Express Logistics & Fleet Management (Pty) Ltd.">
+</div>
+<div>
+<label for="accountType">Account type</label>
+<input id="accountType" value="ADD ACCOUNT TYPE">
+</div>
+<div>
+<label for="accountNumber">Account number</label>
+<input id="accountNumber" value="ADD ACCOUNT NUMBER">
+</div>
+<div>
+<label for="branchCode">Branch code</label>
+<input id="branchCode" value="ADD BRANCH CODE">
+</div>
+<div>
+<label for="paymentReference">Payment reference</label>
+<input id="paymentReference" value="Use quotation number">
+</div>
+</div>
+</div>
+<p class="terms-text">Please use the quotation number as your payment reference. Verify all banking information before issuing quotations to customers.</p>
+</section>
+
+<section class="panel">
+<h2 class="section-title">Terms & conditions</h2>
+<div class="field">
+<label for="paymentTerms">Payment terms</label>
+<input id="paymentTerms" value="As agreed in writing">
+</div>
+<div class="field" style="margin-top:14px">
+<label for="terms">Additional conditions, exclusions and service notes</label>
+<textarea id="terms">This quotation is subject to confirmation of cargo details, service availability, route, loading and offloading requirements, and agreed payment terms. Transport is arranged through approved third-party service providers where applicable. Any additional charges must be agreed with the customer.</textarea>
+</div>
+<div class="signature">
+<div>For SELAF · Authorised representative</div>
+<div>Customer acceptance · Name and signature</div>
+</div>
+</section>
+
+<section class="no-print">
+<div class="actions">
+<button class="btn btn-red" onclick="printQuote()">Print / Save as PDF</button>
+<button class="btn btn-navy" onclick="downloadData()">Download quotation data</button>
+<button class="btn btn-light" onclick="saveDraft()">Save draft</button>
+<button class="btn btn-light" onclick="loadDraft()">Load draft</button>
+<button class="btn btn-light" onclick="newQuote()">New quotation</button>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+SELAF · SMART EXPRESS LOGISTICS & FLEET MANAGEMENT (PTY) LTD.<br>
+More Than Logistics — We Move Industries.
+</footer>
+
+<script>
+const $` = id => document.getElementById(id);
+
+function localDate(d) {
+return d.getFullYear() + '-' +
+String(d.getMonth()+1).padStart(2,'0') + '-' +
+String(d.getDate()).padStart(2,'0');
 }
-const form=target.querySelector('#recordForm');form.addEventListener('submit',e=>{e.preventDefault();const 
-fd=new FormData(form),obj={id:d.id,updated:new Date().toISOString()};for(const [k,v] of fd.entries())obj[k]=v;obj.status=fd.get('status')||'Draft';obj.date=fd.get('date')||today();if(type==='booking'){obj.carrierCost=Number(fd.get('carrierCost'))||0;obj.weight=Number(fd.get('weight'))||0;obj.distance=Number(fd.get('distance'))||0;obj.checklist=Object.fromEntries([...form.querySelectorAll('[data-check]')].map(el=>[el.dataset.check,el.checked]));obj.items=[]}else{obj.items=(d.items||[]).map((it,i)=>({description:form.querySelector(`[data-item="${i}"][data-key="descrip
-tion"]`)?.value||'',qty:Number(form.querySelector(`[data-item="${i}"][data-key="qty"]`)?.value)||0,unit:form.querySelector(`[data-item="${i}"][data-key="unit"]`)?.value||'unit',price:Number(form.querySelector(`[data-item="${i}"][data-key="price"]`)?.value)||0}));obj.discount=Number(fd.get('discount'))||0;obj.vatRate=Number(fd.get('vatRate'))||0;obj.vatEnabled=form.querySelector('[name="vatEnabled"]').checked;obj.total=calcTotals(obj).total;if(type==='quote')obj.customer=fd.get('customer')||'';else obj.supplier=fd.get('supplier')||''}const 
-arr=type==='quote'?db.quotes:type==='po'?db.pos:db.bookings;const idx=arr.findIndex(x=>x.id===obj.id);if(idx>=0)arr[idx]=obj;else arr.push(obj);saveDB();cancelEditor(type);alert(title+' saved in this browser.')});
+
+function makeQuoteNo() {
+const d = new Date();
+const day = d.getFullYear() +
+String(d.getMonth()+1).padStart(2,'0') +
+String(d.getDate()).padStart(2,'0');
+return 'SELAF-' + day + '-' +
+Math.random().toString(36).slice(2,6).toUpperCase();
 }
-function field(label,name,value='',type='text'){return `<div class="field"><label>${esc(label)}</label><input name="${esc(name)}" type="${type}" value="${esc(value)}" ${type==='number'?'step="any"':''}></div>`}
-function 
-textareaField(label,name,value=''){return `<div class="field full"><label>${esc(label)}</label><textarea name="${esc(name)}">${esc(value)}</textarea></div>`}
-function selectField(label,name,options,value){return `<div class="field"><label>${esc(label)}</label><select name="${esc(name)}">${options.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join('')}</select></div>`}
-function readItemsFromEditor(){const form=document.querySelector('#recordForm');if(!form)return[];const indices=[...new 
-Set([...form.querySelectorAll('[data-item]')].map(x=>x.dataset.item))];return indices.map(i=>({description:form.querySelector(`[data-item="${i}"][data-key="description"]`)?.value||'',qty:Number(form.querySelector(`[data-item="${i}"][data-key="qty"]`)?.value)||0,unit:form.querySelector(`[data-item="${i}"][data-key="unit"]`)?.value||'unit',price:Number(form.querySelector(`[data-item="${i}"][data-key="price"]`)?.value)||0}))}
-function updateTotals(){const form=document.querySelector('#recordForm');if(!form||!form.querySelector('#totalsBox'))return;const 
-r={items:readItemsFromEditor(),discount:Number(form.querySelector('[name="discount"]').value)||0,vatRate:Number(form.querySelector('[name="vatRate"]').value)||0,vatEnabled:form.querySelector('[name="vatEnabled"]').checked};const t=calcTotals(r);form.querySelector('#totalsBox').innerHTML=`<div class="total-row"><span>Subtotal</span><strong>${money(t.subtotal)}</strong></div><div class="total-row"><span>Discount</span><strong>− ${money(t.discount)}</strong></div><div class="total-row"><span>VAT 
-(${r.vatEnabled?r.vatRate:0}%)</span><strong>${money(t.vat)}</strong></div><div class="total-row grand"><span>Total</span><strong>${money(t.total)}</strong></div>`}
-function addLine(){const form=document.querySelector('#recordForm');if(!form)return;const body=form.querySelector('#itemsBody');const i=body.querySelectorAll('tr').length;body.insertAdjacentHTML('beforeend',lineRows([{description:'',qty:1,unit:'unit',price:0}],true).replaceAll('data-item="0"','data-item="'+i+'"'));body.querySelectorAll(`[data-item="${i}"]`).forEach(inp=>inp.ad
-dEventListener('input',updateTotals));updateTotals()}
-function removeLine(i){const form=document.querySelector('#recordForm');const current=readItemsFromEditor();current.splice(i,1);const body=form.querySelector('#itemsBody');body.innerHTML=lineRows(current,true);body.querySelectorAll('[data-item]').forEach(inp=>inp.addEventListener('input',updateTotals));updateTotals()}
-function cancelEditor(type){const isQuote=type==='quote',isPO=type==='po';document.getElementById(isQuote?'quoteEditor':isPO?'poEditor':'bookingEditor').classList.add('hidd
-en');document.getElementById(isQuote?'quotesList':isPO?'posList':'bookingsList').classList.remove('hidden');editType='';editId='';renderAll()}
-function deleteRecord(type,id){if(!confirm('Delete this record permanently from this browser?'))return;const arr=type==='quote'?db.quotes:type==='po'?db.pos:db.bookings;const i=arr.findIndex(x=>x.id===id);if(i>=0)arr.splice(i,1);saveDB();cancelEditor(type)}
-function docHTML(type,r){const s=db.settings;const title=type==='quote'?'CUSTOMER QUOTATION':type==='po'?'PURCHASE ORDER':'CARRIER TRANSPORT 
-ORDER & LOAD CHECKLIST';let party=type==='quote'?r.customer:type==='po'?r.supplier:type==='booking'?r.carrier:r.customer;let details='';if(type==='booking'){details=`<div class="form-grid"><div><b>Collection:</b> ${esc(r.origin)}</div><div><b>Delivery:</b> ${esc(r.destination)}</div><div><b>Collection date:</b> ${esc(r.collectionDate)}</div><div><b>Required delivery date:</b> ${esc(r.deliveryDate)}</div><div><b>Vehicle / trailer:</b> ${esc(r.vehicleType)}</div><div><b>Cargo:</b> ${esc(r.cargo)}</div><div><b>Weight:</b> 
-${esc(r.weight)} tonnes</div><div><b>Pieces / pallets:</b> ${esc(r.pieces)}</div><div><b>Carrier:</b> ${esc(r.carrier)}</div><div><b>Carrier contact:</b> ${esc(r.carrierContact)}</div><div><b>Carrier reference:</b> ${esc(r.carrierRef)}</div><div><b>Vehicle / driver:</b> ${esc(r.vehicleDetails)}</div><div><b>Collection contact:</b> ${esc(r.customer)} · ${esc(r.customerContact)}</div><div><b>Load reference:</b> ${esc(r.customerRef)}</div></div><p><b>Special instructions:</b> ${esc(r.instructions)}</p>${checklistPrint(r.checklist||{})}` }else{const 
-t=calcTotals(r);details=`<div class="table-wrap"><table><thead><tr><th>Description</th><th>Qty</th><th>Unit</th><th>Unit price</th><th>Line total</th></tr></thead><tbody>${lineRows(r.items,false)}</tbody></table></div><div class="totals"><div class="total-row"><span>Subtotal</span><strong>${money(t.subtotal)}</strong></div><div class="total-row"><span>Discount</span><strong>${money(t.discount)}</strong></div><div class="total-row"><span>VAT</span><strong>${money(t.vat)}</strong></div><div class="total-row 
-grand"><span>Total</span><strong>${money(t.total)}</strong></div></div>`}return `<div class="print-header"><img src="./SELAF_Standalone_Logo_High_Quality.png" alt="SELAF logo" onerror="this.outerHTML='&lt;div class=&quot;logo-fallback&quot;&gt;SELAF&lt;/div&gt;'"><div><h1>SELAF</h1><p>${esc(s.company)}</p><p>Reg: ${esc(s.registration)} · ${esc(s.email)} · ${esc(s.phone)}</p><p>${esc(s.address)}</p></div></div><div class="print-doc-title">${title}</div><div class="form-grid"><div><b>Document no.:</b> ${esc(r.ref)}</div><div><b>Date:</b> 
-${esc(r.date)}</div><div><b>Status:</b> ${esc(r.status)}</div><div><b>${type==='po'?'Supplier':type==='booking'?'Carrier':'Customer'}:</b> ${esc(party||'')}</div><div><b>Contact:</b> ${esc(r.contact||r.customerContact||'')}</div><div><b>Reference:</b> ${esc(r.reference||r.customerRef||'')}</div></div><div style="margin:18px 0">${details}</div>${type!=='booking'?`<p><b>Delivery / service address:</b> ${esc(r.deliveryAddress||'')}</p>`:''}<p><b>Terms / instructions:</b><br>${esc(r.terms||r.instructions||s.terms).replace(/\n/g,'<br>')}</p>${type!=='booking'&&s.banking
-?`<p><b>Banking details:</b> ${esc(s.banking)}</p>`:''}<p style="margin-top:30px">Prepared by SELAF · More Than Logistics — We Move Industries.</p>`}
-function printForm(type){const form=document.querySelector('#recordForm');if(!form)return;const fd=new FormData(form),r={};for(const [k,v] of fd.entries())r[k]=v;r.status=fd.get('status')||'Draft';r.items=readItemsFromEditor();r.discount=Number(fd.get('discount'))||0;r.vatRate=Number(fd.get('vatRate'))||0;r.vatEnabled=!!form.querySelector('[name="vatEnabled"]')?.checked;r.total=calcTotals(r).total;if(type==='booking'){r.carrierCost=Number(fd.get('carri
-erCost'))||0;r.checklist=Object.fromEntries([...form.querySelectorAll('[data-check]')].map(el=>[el.dataset.check,el.checked]))}openPrint(type,r)}
-function printRecord(type,id){const arr=type==='quote'?db.quotes:type==='po'?db.pos:db.bookings;const r=arr.find(x=>x.id===id);if(r)openPrint(type,r)}
-function openPrint(type,r){const old=document.getElementById('printSheet');if(old)old.remove();const div=document.createElement('div');div.id='printSheet';div.className='print-only';div.innerHTML=docHTML(type,r);document.body.appendChild(di
-v);document.body.classList.add('printing');window.print();document.body.classList.remove('printing');div.remove()}
-function downloadCurrentJSON(type){const form=document.querySelector('#recordForm');if(!form)return;const fd=new FormData(form),r={};for(const [k,v] of fd.entries())r[k]=v;r.items=readItemsFromEditor();downloadFile(`${r.ref||type}.json`,JSON.stringify(r,null,2),'application/json')}
-function downloadFile(name,content,mime){const blob=new Blob([content],{type:mime});const 
-url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
-document.getElementById('exportDataBtn').addEventListener('click',()=>downloadFile('selaf-operations-backup-'+today()+'.json',JSON.stringify(db,null,2),'application/json'));
-document.getElementById('importDataBtn').addEventListener('click',()=>document.getElementById('importFile').click());
-document.getElementById('importFile').addEventListener('change',async e=>{const 
-file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!data||!Array.isArray(data.quotes)||!Array.isArray(data.pos)||!Array.isArray(data.bookings)||!data.settings)throw Error('Invalid backup format');if(confirm('Importing will replace the records currently saved in this browser. Continue?')){db={settings:{...DEFAULTS,...data.settings},quotes:data.quotes,pos:data.pos,bookings:data.bookings};saveDB();alert('Backup imported.')}}catch(err){alert('Could not import this file. Please select a valid SELAF JSON backup.')}e.target.value=''});
-renderAll();
+
+function setDates() {
+const today = new Date();
+const valid = new Date(today);
+valid.setDate(today.getDate()+7);
+$('quoteDate').value = localDate(today); $('validUntil').value = localDate(valid);
+}
+
+function addItem(description='', qty=1, unit='Trip', rate=0) {
+const row = document.createElement('tr');
+const values = [description, qty, unit, rate];
+const labels = ['Description', 'Quantity', 'Unit', 'Rate'];
+values.forEach((value, index) => {
+const td = document.createElement('td');
+const input = document.createElement('input');
+input.setAttribute('aria-label', labels[index]);
+if (index === 1 || index === 3) {
+input.type = 'number';
+input.min = '0';
+input.step = 'any';
+}
+if (index === 0) input.placeholder = 'Service description';
+if (index === 2) input.placeholder = 'Trip';
+input.value = value;
+input.addEventListener('input', renderTotals);
+td.appendChild(input);
+row.appendChild(td);
+});
+const amount = document.createElement('td');
+amount.className = 'right line-total';
+amount.textContent = money(0);
+row.appendChild(amount);
+
+const removeCell = document.createElement('td');
+removeCell.className = 'no-print';
+const removeButton = document.createElement('button');
+removeButton.className = 'btn btn-light';
+removeButton.type = 'button';
+removeButton.textContent = 'Remove';
+removeButton.onclick = () => { row.remove(); renderTotals(); };
+removeCell.appendChild(removeButton);
+row.appendChild(removeCell);
+
+`$('items').appendChild(row);
+renderTotals();
+}
+
+function money(value) {
+return new Intl.NumberFormat('en-ZA', {
+style: 'currency',
+currency: $`('currency').value,
+minimumFractionDigits: 2
+}).format(value);
+}
+
+function calculate() {
+let subtotal = 0;
+[...`$('items').rows].forEach(row => {
+const inputs = row.querySelectorAll('input');
+const qty = Math.max(0, Number(inputs[1].value) || 0);
+const rate = Math.max(0, Number(inputs[3].value) || 0);
+const amount = qty * rate;
+subtotal += amount;
+row.querySelector('.line-total').textContent = money(amount);
+});
+
+const discountRate = Math.min(100, Math.max(0, Number( ('vatRate').value) || 0);
+const vat = $`('vatEnabled').checked ? taxable * vatRate / 100 : 0;
+return {subtotal, discount, vat, total: taxable + vat};
+}
+
+function renderTotals() {
+if (!$('items')) return; const result = calculate(); $('subtotal').textContent = money(result.subtotal);
+$('discountAmount').textContent = money(result.discount); $('vatAmount').textContent = money(result.vat);
+`$('grandTotal').textContent = money(result.total);
+}
+
+function collectData() {
+const fields = [
+'quoteNo','quoteDate','validUntil','currency','deliveryDate',
+'legalName','businessAddress','customer','contact','customerEmail',
+'customerPhone','customerAddress','discount','vatRate','vatEnabled',
+'bankName','accountName','accountType','accountNumber','branchCode',
+'paymentReference','paymentTerms','terms'
+ ];
+const data = {};
+fields.forEach(id => data[id] =  (id).checked :  ('items').rows].map(row => {
+const i = row.querySelectorAll('input');
+return {description:i[0].value, qty:i[1].value, unit:i[2].value, rate:i[3].value};
+});
+return data;
+}
+
+function applyData(data) {
+Object.keys(data).forEach(id => {
+const el = latex
+(id); if (!el || id === 'items') return; if (el.type === 'checkbox') el.checked = !!data[id]; else if (typeof data[id] !== 'object') el.value = data[id]; }); 
+
+('items').innerHTML = '';
+(data.items || []).forEach(i => addItem(i.description, i.qty, i.unit, i.rate));
+if (!data.items || !data.items.length) addItem();
+renderTotals();
+}
+
+function saveDraft() {
+try {
+localStorage.setItem('selafQuoteDraftV2', JSON.stringify(collectData()));
+alert('Draft saved in this browser on this device.');
+} catch(e) {
+alert('Unable to save the draft. Please download the quotation data instead.');
+}
+}
+
+function loadDraft() {
+try {
+const saved = localStorage.getItem('selafQuoteDraftV2');
+if (!saved) return alert('No saved draft was found in this browser.');
+if (confirm('Load the saved draft and replace the current form?')) applyData(JSON.parse(saved));
+} catch(e) {
+alert('Unable to load the saved draft.');
+}
+}
+
+function downloadData() {
+const data = collectData();
+const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = (data.quoteNo || 'SELAF-quotation') + '.json';
+a.click();
+setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function printQuote() {
+if (!$`('customer').value.trim() &&
+!confirm('Customer name is blank. Print anyway?')) return;
+window.print();
+}
+
+function newQuote() {
+if (!confirm('Start a new quotation? Save or download your current quotation first.')) return;
+const keep = [
+'legalName','businessAddress','bankName','accountName','accountType',
+'accountNumber','branchCode','paymentReference'
+ ];
+const saved = {};
+keep.forEach(id => saved[id] = `$(id).value);
+
+[
+'customer','contact','customerEmail','customerPhone','customerAddress',
+'deliveryDate'
+ ].forEach(id =>  ('discount').value = 0;
+ ('vatEnabled').checked = false;
+ ('terms').value = 'This quotation is subject to confirmation of cargo details, service availability, route, loading and offloading requirements, and agreed payment terms. Transport is arranged through approved third-party service providers where applicable. Any additional charges must be agreed with the customer.';
+ (id).value = saved[id]);
+$`('quoteNo').value = makeQuoteNo();
+setDates();
+addItem();
+}
+
+`$('quoteNo').value = makeQuoteNo();
+setDates();
+addItem('Transport service', 1, 'Trip', 0);
 </script>
 </body>
 </html>
